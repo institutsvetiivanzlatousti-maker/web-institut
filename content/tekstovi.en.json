@@ -100,7 +100,7 @@
     "podatak1": "Duration",
     "podatak1_vrijednost": "3 years",
     "podatak2": "Classes",
-    "podatak2_vrijednost": "At weekends",
+    "podatak2_vrijednost": "Friday afternoons and Saturdays",
     "podatak3": "Venue",
     "podatak3_vrijednost": "Greek Catholic Seminary, Zagreb",
     "podatak4": "Completion",
@@ -192,7 +192,12 @@
     "prikaz_popis": "List",
     "kal_danas": "Today",
     "kal_sve": "Download all upcoming events (.ics)",
-    "kal_napomena": "You can import the events into Google, Apple or Outlook Calendar."
+    "kal_napomena": "You can import the events into Google, Apple or Outlook Calendar.",
+    "med_oznaka": "In the media",
+    "med_naslov": "The Institute and the Study in the media.",
+    "med_opis": "An archive of articles, announcements and features about the Institute and the Study of Eastern Christian Spirituality. Links open the publishers’ original pages (in Croatian).",
+    "med_godina": "Year",
+    "med_napomena": "Missing an article? Send us the link at institut.svetiivanzlatousti@gmail.com."
   },
   "dokumenti": {
     "oznaka": "Documents",

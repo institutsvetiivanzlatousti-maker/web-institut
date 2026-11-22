@@ -41,7 +41,7 @@ collections:
             fields:
               - {label: Naziv, name: title, widget: string}
               - {label: Naziv (EN), name: title_en, widget: string, required: false}
-              - {label: Vrsta, name: category, widget: select, required: false, options: ["Predavanje", "Konferencija", "Duhovni susret", "Priča pored Griča", "Nastava Studija", "Radionica", "Liturgija", "Ostalo"], hint: "Večeri s vrstom „Priča pored Griča“ prikazuju se i na stranici Priče pored Griča."}
+              - {label: Vrsta, name: category, widget: select, required: false, options: ["Predavanje", "Konferencija", "Duhovni susret", "Priča pored Griča", "Nastava Studija", "Radionica", "Liturgija", "Svečanost", "Ostalo"], hint: "Večeri s vrstom „Priča pored Griča“ prikazuju se i na stranici Priče pored Griča."}
               - {label: Datum, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false}
               - {label: "Do datuma (za višednevna događanja)", name: date_end, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false, required: false}
               - {label: Početak, name: time, widget: string, required: false, hint: "Npr. 18:00. Ostavite prazno za cjelodnevno događanje."}
@@ -50,6 +50,19 @@ collections:
               - {label: Opis, name: description, widget: text, required: false}
               - {label: Opis (EN), name: description_en, widget: text, required: false}
               - {label: Poveznica, name: url, widget: string, required: false}
+
+          - label: Institut i Studij u medijima
+            name: media
+            widget: list
+            summary: "{{fields.year}} · {{fields.source}} · {{fields.title}}"
+            fields:
+              - {label: Naslov objave, name: title, widget: string}
+              - {label: Godina, name: year, widget: string, hint: "Npr. 2026"}
+              - {label: Izvor (medij), name: source, widget: string, hint: "Npr. IKA, Križevačka eparhija, Laudato"}
+              - {label: Vrsta, name: category, widget: select, options: ["Novosti", "Upisi", "Suradnja", "Događanja", "Studij", "Video", "Registar"], default: "Novosti"}
+              - {label: Kratki opis, name: description, widget: text, required: false}
+              - {label: Kratki opis (EN), name: description_en, widget: text, required: false}
+              - {label: Poveznica na objavu, name: url, widget: string, hint: "Puna adresa, npr. https://ika.hkm.hr/..."}
 
           - label: Projekti
             name: projects
@@ -413,6 +426,11 @@ collections:
               - {label: "Vij naslov", name: vij_naslov, widget: text, required: false}
               - {label: "Vij opis", name: vij_opis, widget: text, required: false}
               - {label: "Vise", name: vise, widget: string, required: false}
+              - {label: "Mediji – oznaka", name: med_oznaka, widget: string, required: false}
+              - {label: "Mediji – naslov", name: med_naslov, widget: text, required: false}
+              - {label: "Mediji – opis", name: med_opis, widget: text, required: false}
+              - {label: "Mediji – natpis „Godina”", name: med_godina, widget: string, required: false}
+              - {label: "Mediji – napomena na dnu", name: med_napomena, widget: text, required: false}
               - {label: "Gal oznaka", name: gal_oznaka, widget: string, required: false}
               - {label: "Gal naslov", name: gal_naslov, widget: text, required: false}
               - {label: "Gal opis", name: gal_opis, widget: text, required: false}
@@ -663,7 +681,7 @@ collections:
               - {label: "Podatak1", name: podatak1, widget: string, required: false, hint: "HR: Trajanje"}
               - {label: "Podatak1 vrijednost", name: podatak1_vrijednost, widget: string, required: false, hint: "HR: 3 godine"}
               - {label: "Podatak2", name: podatak2, widget: string, required: false, hint: "HR: Nastava"}
-              - {label: "Podatak2 vrijednost", name: podatak2_vrijednost, widget: string, required: false, hint: "HR: Vikendom"}
+              - {label: "Podatak2 vrijednost", name: podatak2_vrijednost, widget: string, required: false, hint: "HR: Petkom poslijepodne i subotom"}
               - {label: "Podatak3", name: podatak3, widget: string, required: false, hint: "HR: Mjesto"}
               - {label: "Podatak3 vrijednost", name: podatak3_vrijednost, widget: string, required: false, hint: "HR: Grkokatoličko sjemenište, Zagreb"}
               - {label: "Podatak6", name: podatak6, widget: string, required: false, hint: "HR: Nositelj"}
@@ -761,6 +779,11 @@ collections:
               - {label: "Vij naslov", name: vij_naslov, widget: text, required: false, hint: "HR: Novosti."}
               - {label: "Vij opis", name: vij_opis, widget: text, required: false, hint: "HR: Odabrane vijesti i važne prekretnice u radu Instituta i Studija istočne kršćanske duhovnosti."}
               - {label: "Vise", name: vise, widget: string, required: false, hint: "HR: Prikaži starije novosti"}
+              - {label: "Mediji – oznaka", name: med_oznaka, widget: string, required: false, hint: "HR: Javne objave"}
+              - {label: "Mediji – naslov", name: med_naslov, widget: text, required: false, hint: "HR: Institut i Studij u medijima."}
+              - {label: "Mediji – opis", name: med_opis, widget: text, required: false, hint: "HR: Arhiva članaka, najava i priloga o Institutu i Studiju istočne kršćanske duhovnosti. Poveznice otvaraju izvorne stranice nakladnika."}
+              - {label: "Mediji – natpis „Godina”", name: med_godina, widget: string, required: false, hint: "HR: Godina"}
+              - {label: "Mediji – napomena na dnu", name: med_napomena, widget: text, required: false, hint: "HR: Nedostaje li neka objava? Pošaljite nam poveznicu na institut.svetiivanzlatousti@gmail.com."}
               - {label: "Gal oznaka", name: gal_oznaka, widget: string, required: false, hint: "HR: Trenuci iz života Instituta"}
               - {label: "Gal naslov", name: gal_naslov, widget: text, required: false, hint: "HR: Fotogalerija."}
               - {label: "Gal opis", name: gal_opis, widget: text, required: false, hint: "HR: Predavanja, duhovni susreti, projekti i suradnje."}

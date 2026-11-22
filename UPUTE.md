@@ -55,6 +55,7 @@ U uredniku postoje tri skupine:
 
 1. **Novosti, događanja, projekti, dokumenti…** (`content/sadrzaj.json`):
    - novosti, događanja, projekti (sa slikom i dužim opisom)
+   - **Institut i Studij u medijima**: arhiva poveznica na članke (naslov, godina, izvor, vrsta, poveznica); prikazuje se na stranici Novosti s pretraživanjem i filtrima
    - dokumenti (prenesite PDF ili upišite poveznicu)
    - vodstvo Instituta, fotogalerija
    - obavijesti, raspored i predavači Studija

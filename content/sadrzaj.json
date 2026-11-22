@@ -23,6 +23,38 @@
       "description": "Institut je osnovan radi promicanja istočne kršćanske duhovnosti i praćenja rada Studija.",
       "description_en": "The Institute was founded to promote Eastern Christian spirituality and to support the work of the Study.",
       "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/1673-studij-istocne-krscanske-duhovnosti-zapoceo-s-akademskom-godinom-2024-2025"
+    },
+    {
+      "title": "Dan otvorenih vrata i posjet Sankt Ignatios Collegea",
+      "title_en": "Open day and visit of Sankt Ignatios College",
+      "date": "2026-06-23",
+      "description": "Studij je ugostio partnere iz Švedske i predstavio svoj program na Danu otvorenih vrata.",
+      "description_en": "The Study hosted its Swedish partners and presented its programme at an open day.",
+      "url": "https://ika.hkm.hr/novosti/clanovi-studija-istocne-krscanske-duhovnosti-primili-kolege-sa-sankt-ignatios-collegea/"
+    },
+    {
+      "title": "Svečano proslavljen Dan Studija",
+      "title_en": "Study Day celebrated",
+      "date": "2026-01-31",
+      "description": "Na blagdan Triju svetitelja u Križevcima su predstavljena izvješća o radu Studija i Instituta, a najbolji polaznici nagrađeni.",
+      "description_en": "On the feast of the Three Holy Hierarchs in Križevci, reports on the work of the Study and the Institute were presented and the best students awarded.",
+      "url": "https://ika.hkm.hr/novosti/svecano-proslavljen-dan-studija-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Održana konferencija „1700 godina nakon Niceje”",
+      "title_en": "Conference “1700 Years after Nicaea” held",
+      "date": "2025-05-10",
+      "description": "Međunarodna konferencija u Grkokatoličkom sjemeništu povezala je istočnu i zapadnu kršćansku baštinu.",
+      "description_en": "The international conference at the Greek Catholic Seminary connected the Eastern and Western Christian heritage.",
+      "url": "https://ika.hkm.hr/novosti/medunarodna-konferencija-1700-godina-nakon-niceje-odrzana-u-grkokatolickom-sjemenistu/"
+    },
+    {
+      "title": "Osnovan Studentski zbor",
+      "title_en": "Student Council founded",
+      "date": "2025-01-17",
+      "description": "Polaznici Studija osnovali su Studentski zbor.",
+      "description_en": "Students of the Study founded their Student Council.",
+      "url": "https://ika.hkm.hr/novosti/osnovan-studentski-zbor-studija-istocne-krscanske-duhovnosti/"
     }
   ],
   "events": [
@@ -47,6 +79,79 @@
       "description": "Gošća večeri bila je dr. sc. Jasmina Juroš, advokatica Rimske rote. U neformalnom razgovoru o parnicama ništavnosti ženidbe sudionici su mogli pitati o postupku, kanonskom pravu i opravdanim razlozima za pokretanje postupka. Večeri je prethodila Sveta liturgija u 18 sati.",
       "description_en": "The guest was Dr Jasmina Juroš, an advocate of the Roman Rota. In an informal conversation about marriage nullity proceedings, participants could ask about the procedure, canon law and valid grounds for initiating a case. The evening was preceded by the Divine Liturgy at 18:00.",
       "url": "https://book.hr/na-pricama-pored-grica-gostuje-dr-sc-jasmina-juros/"
+    },
+    {
+      "title": "Osnivanje Studentskog zbora Studija",
+      "title_en": "Founding of the Study's Student Council",
+      "category": "Svečanost",
+      "date": "2025-01-17",
+      "place": "",
+      "description": "Polaznici Studija istočne kršćanske duhovnosti osnovali su Studentski zbor.",
+      "description_en": "Students of the Study of Eastern Christian Spirituality founded their Student Council.",
+      "url": "https://ika.hkm.hr/novosti/osnovan-studentski-zbor-studija-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Međunarodna konferencija „1700 godina nakon Niceje”",
+      "title_en": "International conference “1700 Years after Nicaea”",
+      "category": "Konferencija",
+      "date": "2025-05-10",
+      "place": "Svečana dvorana Grkokatoličkog sjemeništa, Zagreb",
+      "description": "Konferencija „1700 godina nakon Niceje – povezivanje istočne i zapadne kršćanske baštine” u organizaciji Križevačke eparhije, Studija istočne kršćanske duhovnosti pri Institutu Sveti Ivan Zlatousti i Sankt Ignatios Collegea iz Švedske. Izlaganja će biti objavljena u zborniku.",
+      "description_en": "The conference “1700 Years after Nicaea – connecting the Eastern and Western Christian heritage”, organised by the Eparchy of Križevci, the Study of Eastern Christian Spirituality at the St John Chrysostom Institute and Sankt Ignatios College (Sweden). The papers will be published in a collection.",
+      "url": "https://ika.hkm.hr/novosti/medunarodna-konferencija-1700-godina-nakon-niceje-odrzana-u-grkokatolickom-sjemenistu/"
+    },
+    {
+      "title": "Dan Studija istočne kršćanske duhovnosti",
+      "title_en": "Study of Eastern Christian Spirituality Day",
+      "category": "Svečanost",
+      "date": "2026-01-30",
+      "place": "Križevci",
+      "description": "Na blagdan Triju svetitelja Studij je proslavio svoj dan predavanjem, izvješćima o radu Studentskog zbora i Instituta, arhijerejskom liturgijom i nagradama najboljim polaznicima.",
+      "description_en": "On the feast of the Three Holy Hierarchs the Study celebrated its day with a lecture, reports from the Student Council and the Institute, a hierarchical liturgy and awards for the best students.",
+      "url": "https://ika.hkm.hr/novosti/svecano-proslavljen-dan-studija-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Susret s riječkim nadbiskupom",
+      "title_en": "Meeting with the Archbishop of Rijeka",
+      "category": "Ostalo",
+      "date": "2026-05-17",
+      "place": "Rijeka",
+      "description": "Predstavnici Sankt Ignatios Collegea iz Švedske i Studija posjetili su riječkog nadbiskupa. Razgovaralo se o suradnji u akademskom i kulturnom području te u međukršćanskom dijalogu.",
+      "description_en": "Representatives of Sankt Ignatios College (Sweden) and the Study visited the Archbishop of Rijeka to discuss academic, cultural and inter-Christian cooperation.",
+      "url": "https://www.ri-nadbiskupija.hr/predstavnici-sveucilista-iz-svedske-i-studija-istocne-krscanske-duhovnosti-posjetili-nadbiskupa-uzinica/"
+    },
+    {
+      "title": "Posjet Sankt Ignatios Collegea iz Švedske",
+      "title_en": "Visit of Sankt Ignatios College (Sweden)",
+      "category": "Ostalo",
+      "date": "2026-06-17",
+      "date_end": "2026-06-18",
+      "place": "Zagreb",
+      "description": "Članovi Studija ugostili su kolege sa Sankt Ignatios Collegea, partnerske ustanove iz Švedske.",
+      "description_en": "Members of the Study hosted colleagues from Sankt Ignatios College, the partner institution from Sweden.",
+      "url": "https://ika.hkm.hr/novosti/clanovi-studija-istocne-krscanske-duhovnosti-primili-kolege-sa-sankt-ignatios-collegea/"
+    },
+    {
+      "title": "Dan otvorenih vrata Studija",
+      "title_en": "Open day of the Study",
+      "category": "Predavanje",
+      "date": "2026-06-19",
+      "time": "17:00",
+      "place": "Grkokatoličko sjemenište, Zagreb",
+      "description": "Predstavljanje Studija istočne kršćanske duhovnosti i programa Sankt Ignatios Collegea iz Švedske, uz predavanje „Poslušnost Riječi Božjoj usred izazova suvremenog svijeta”.",
+      "description_en": "Presentation of the Study of Eastern Christian Spirituality and of the programme of Sankt Ignatios College (Sweden), with a lecture on obedience to the Word of God amid the challenges of the modern world.",
+      "url": "https://ika.hkm.hr/najave/dan-otvorenih-vrata-studija-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Prve obrane diplomskih radova",
+      "title_en": "First thesis defences",
+      "category": "Svečanost",
+      "date": "2026-11-13",
+      "date_end": "2026-11-14",
+      "place": "",
+      "description": "Prve polaznice Studija istočne kršćanske duhovnosti obranile su diplomske radove.",
+      "description_en": "The first students of the Study of Eastern Christian Spirituality defended their theses.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/2072-prve-diplomantice-na-studiju-istocne-krscanske-duhovnosti"
     }
   ],
   "projects": [
@@ -69,7 +174,10 @@
       "title_en": "International cooperation",
       "status": "U tijeku",
       "description": "Povezivanje s ustanovama i zajednicama kršćanskoga Istoka izvan Hrvatske: razmjena predavača, zajednički programi i susreti.",
-      "description_en": "Building links with institutions and communities of the Christian East beyond Croatia: exchange of lecturers, joint programmes and meetings."
+      "description_en": "Building links with institutions and communities of the Christian East beyond Croatia: exchange of lecturers, joint programmes and meetings.",
+      "details": "## Sankt Ignatios College, Švedska\nStudij istočne kršćanske duhovnosti i Institut surađuju sa Sankt Ignatios Collegeom iz Švedske.\n- **10. 5. 2025.** zajednička međunarodna konferencija „1700 godina nakon Niceje” u Zagrebu\n- **17. 5. 2026.** susret s riječkim nadbiskupom o akademskoj, kulturnoj i međukršćanskoj suradnji\n- **17. – 19. 6. 2026.** posjet švedskih kolega i Dan otvorenih vrata s predstavljanjem njihova programa",
+      "details_en": "## Sankt Ignatios College, Sweden\nThe Study of Eastern Christian Spirituality and the Institute cooperate with Sankt Ignatios College in Sweden.\n- **10 May 2025** joint international conference “1700 Years after Nicaea” in Zagreb\n- **17 May 2026** meeting with the Archbishop of Rijeka on academic, cultural and inter-Christian cooperation\n- **17–19 June 2026** visit of the Swedish colleagues and an open day presenting their programme",
+      "url": "https://ika.hkm.hr/novosti/clanovi-studija-istocne-krscanske-duhovnosti-primili-kolege-sa-sankt-ignatios-collegea/"
     }
   ],
   "photos": [],
@@ -108,6 +216,15 @@
       "file": "/uploads/dokumenti/vodic-kroz-studij-sikd.pdf",
       "description": "Odluke o osnivanju, misija i vizija Studija, izvedbeni plan nastave i sadržaj predmeta (na hrvatskom i engleskom).",
       "description_en": "Founding decisions, mission and vision of the Study, the teaching plan and course descriptions (in Croatian and English)."
+    },
+    {
+      "title": "Javni podaci o Institutu (Fina Info.BIZ)",
+      "title_en": "Public data on the Institute (Fina Info.BIZ)",
+      "category": "Ostalo",
+      "year": "2026",
+      "description": "Službena evidencija neprofitne organizacije u registru Fine, OIB 41214716365.",
+      "description_en": "Official record of the non-profit organisation in the Fina register, OIB 41214716365.",
+      "url": "https://infobiz.fina.hr/neprofitni/institut-sv-i-z/OIB-41214716365"
     }
   ],
   "courses": [
@@ -312,5 +429,268 @@
       "description_en": "Public speaking is an essential part of education in theology and the humanities. Students prepare speeches and learn to deliver them without communication errors, and prepare longer texts and passages of Holy Scripture used in the liturgy for public reading."
     }
   ],
-  "study_leaders": []
+  "study_leaders": [],
+  "media": [
+    {
+      "title": "Prve diplomantice na Studiju istočne kršćanske duhovnosti",
+      "year": "2026",
+      "source": "Križevačka eparhija",
+      "category": "Novosti",
+      "description": "Obrane završnih radova prve generacije, 13. i 14. studenoga 2026.",
+      "description_en": "Thesis defences of the first generation, 13–14 November 2026.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/2072-prve-diplomantice-na-studiju-istocne-krscanske-duhovnosti"
+    },
+    {
+      "title": "Prve polaznice Studija obranile diplomske radove",
+      "year": "2026",
+      "source": "IKA",
+      "category": "Novosti",
+      "description": "Izvještaj o prvim diplomanticama, objavljen 16. studenoga 2026.",
+      "description_en": "Report on the first graduates, published 16 November 2026.",
+      "url": "https://ika.hkm.hr/novosti/prve-polaznice-studija-istocne-krscanske-duhovnosti-obranile-diplomske-radove/"
+    },
+    {
+      "title": "Upisi na Studij istočne kršćanske duhovnosti – jesen 2026.",
+      "year": "2026",
+      "source": "Križevačka eparhija",
+      "category": "Upisi",
+      "description": "Službena objava o upisima i kontaktima za akademsku godinu 2026./2027.",
+      "description_en": "Official enrolment notice for the 2026/2027 academic year.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/2049-upisi-na-studij-istocne-krscanske-duhovnosti-2"
+    },
+    {
+      "title": "Otvorene predbilježbe za upis na Studij",
+      "year": "2026",
+      "source": "IKA",
+      "category": "Upisi",
+      "description": "Vikend nastava, način prijave i kontakt tajništva; objava od 1. listopada 2026.",
+      "description_en": "Weekend classes, how to apply and the office contact; published 1 October 2026.",
+      "url": "https://ika.hkm.hr/novosti/otvorene-predbiljezbe-za-upis-na-studij-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Otvorene predbilježbe za upis na Studij",
+      "year": "2026",
+      "source": "Ekumena",
+      "category": "Upisi",
+      "description": "Prenesena vijest o predbilježbama i organizaciji Studija.",
+      "description_en": "Republished news on pre-registration and the organisation of the Study.",
+      "url": "https://ekumena.org/otvorene-predbiljezbe-za-upis-na-studij-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Grkokatolička Crkva u Zagrebu pokreće Studij istočne kršćanske duhovnosti",
+      "year": "2026",
+      "source": "Narodno.hr",
+      "category": "Upisi",
+      "description": "Medijska najava upisa i prikaz obrazovnih tema Studija.",
+      "description_en": "Media report on enrolment and the subjects of the Study.",
+      "url": "https://narodno.hr/vijesti/grkokatolicka-crkva-u-zagrebu-pokrece-studij-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Studij: predstavljanje studijskih programa i posjet Sankt Ignatios Collegea",
+      "year": "2026",
+      "source": "Križevačka eparhija",
+      "category": "Suradnja",
+      "description": "Posjet švedskih partnera i predstavljanje programa u lipnju 2026.",
+      "description_en": "Visit of the Swedish partners and presentation of programmes, June 2026.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/2009-studij-istocne-krscanske-duhovnosti-predstavljanje-studijskih-programa"
+    },
+    {
+      "title": "Članovi Studija primili kolege sa Sankt Ignatios Collegea",
+      "year": "2026",
+      "source": "IKA",
+      "category": "Suradnja",
+      "description": "Suradnja i posjet 17. i 18. lipnja; izvještaj objavljen 23. lipnja 2026.",
+      "description_en": "Cooperation visit on 17–18 June; report published 23 June 2026.",
+      "url": "https://ika.hkm.hr/novosti/clanovi-studija-istocne-krscanske-duhovnosti-primili-kolege-sa-sankt-ignatios-collegea/"
+    },
+    {
+      "title": "Dan otvorenih vrata Studija istočne kršćanske duhovnosti",
+      "year": "2026",
+      "source": "IKA",
+      "category": "Događanja",
+      "description": "Najava predstavljanja programa Studija i međunarodnih partnera.",
+      "description_en": "Announcement of the open day presenting the Study and its international partners.",
+      "url": "https://ika.hkm.hr/najave/dan-otvorenih-vrata-studija-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Predstavljanje studija Sankt Ignatios College u Zagrebu",
+      "year": "2026",
+      "source": "Laudato",
+      "category": "Suradnja",
+      "description": "Najava predstavljanja u suradnji sa Studijom istočne kršćanske duhovnosti.",
+      "description_en": "Announcement of the presentation held together with the Study.",
+      "url": "https://laudato.hr/vijesti/najave-dogadaja/predstavljanje-studija-sankt-ignatios-college-u-zagrebu"
+    },
+    {
+      "title": "Predstavnici sveučilišta iz Švedske i Studija posjetili nadbiskupa Uzinića",
+      "year": "2026",
+      "source": "Riječka nadbiskupija",
+      "category": "Suradnja",
+      "description": "Izvješće o međunarodnom susretu u Rijeci, svibanj 2026.",
+      "description_en": "Report on the international meeting in Rijeka, May 2026.",
+      "url": "https://www.ri-nadbiskupija.hr/predstavnici-sveucilista-iz-svedske-i-studija-istocne-krscanske-duhovnosti-posjetili-nadbiskupa-uzinica/"
+    },
+    {
+      "title": "Predstavnici Sankt Ignatios College iz Švedske posjetili riječkog nadbiskupa",
+      "year": "2026",
+      "source": "Novi list",
+      "category": "Suradnja",
+      "description": "Medijsko izvješće o susretu s predstavnicima Studija.",
+      "description_en": "Media report on the meeting with representatives of the Study.",
+      "url": "https://www.novilist.hr/rijeka-regija/rijeka/predstavnici-sankt-ignatios-college-iz-svedske-posjetili-rijeckog-nadbiskupa/"
+    },
+    {
+      "title": "Dan Studija istočne kršćanske duhovnosti",
+      "year": "2026",
+      "source": "Križevačka eparhija",
+      "category": "Događanja",
+      "description": "Proslava i pregled djelovanja Studija i Instituta, siječanj 2026.",
+      "description_en": "Celebration and review of the work of the Study and the Institute, January 2026.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/1948-dan-studija-istocne-krscanske-duhovnosti"
+    },
+    {
+      "title": "Svečano proslavljen Dan Studija istočne kršćanske duhovnosti",
+      "year": "2026",
+      "source": "IKA",
+      "category": "Događanja",
+      "description": "Dan Studija u Križevcima i izvješće o radu Instituta.",
+      "description_en": "Study Day in Križevci and a report on the Institute's work.",
+      "url": "https://ika.hkm.hr/novosti/svecano-proslavljen-dan-studija-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Proslavljen Dan Studija – disati s oba plućna krila Crkve",
+      "year": "2026",
+      "source": "Ekumena",
+      "category": "Događanja",
+      "description": "Neovisna objava o proslavi Dana Studija.",
+      "description_en": "Independent report on the Study Day celebration.",
+      "url": "https://ekumena.org/proslavljen-dan-studija-istocne-krscanske-duhovnosti-disati-s-oba-plucna-krila-crkve/"
+    },
+    {
+      "title": "Međunarodna konferencija „1700 godina nakon Niceje”",
+      "year": "2025",
+      "source": "Križevačka eparhija",
+      "category": "Događanja",
+      "description": "Izvješće o konferenciji održanoj 10. svibnja 2025.",
+      "description_en": "Report on the conference held on 10 May 2025.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/1815-medunarodna-konferencija-1700-godina-nakon-niceje-odrzana-u-grkokatolickom-sjemenistu"
+    },
+    {
+      "title": "Međunarodna konferencija „1700 godina nakon Niceje” održana u Zagrebu",
+      "year": "2025",
+      "source": "IKA",
+      "category": "Događanja",
+      "description": "Izvješće o konferenciji u organizaciji Studija, Instituta i partnera.",
+      "description_en": "Report on the conference organised by the Study, the Institute and partners.",
+      "url": "https://ika.hkm.hr/novosti/medunarodna-konferencija-1700-godina-nakon-niceje-odrzana-u-grkokatolickom-sjemenistu/"
+    },
+    {
+      "title": "Osnovan Studentski zbor Studija istočne kršćanske duhovnosti",
+      "year": "2025",
+      "source": "IKA",
+      "category": "Studij",
+      "description": "Osnivanje Studentskog zbora 17. siječnja 2025.",
+      "description_en": "Founding of the Student Council, 17 January 2025.",
+      "url": "https://ika.hkm.hr/novosti/osnovan-studentski-zbor-studija-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Upisi na Studij istočne kršćanske duhovnosti 2025./2026.",
+      "year": "2025",
+      "source": "Križevačka eparhija",
+      "category": "Upisi",
+      "description": "Objava o upisima za akademsku godinu 2025./2026.",
+      "description_en": "Enrolment notice for the 2025/2026 academic year.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/1881-upisi-na-studij-istocne-krscanske-duhovnosti"
+    },
+    {
+      "title": "Izdvojeno – Istočna kršćanska duhovnost",
+      "year": "2025",
+      "source": "YouTube / Laudato",
+      "category": "Video",
+      "description": "Videoprilog o Studiju istočne kršćanske duhovnosti.",
+      "description_en": "Video feature about the Study of Eastern Christian Spirituality.",
+      "url": "https://www.youtube.com/watch?v=mqQutuiJZg4"
+    },
+    {
+      "title": "Vladika Stipić na ekumenskom simpoziju u Švedskoj",
+      "year": "2024",
+      "source": "IKA",
+      "category": "Suradnja",
+      "description": "Objava o međunarodnim susretima koji uključuju Studij.",
+      "description_en": "Report on international meetings involving the Study.",
+      "url": "https://ika.hkm.hr/novosti/vladika-stipic-na-ekumenskom-simpoziju-u-svedskoj/"
+    },
+    {
+      "title": "Vladika Stipić na ekumenskom simpoziju u Švedskoj",
+      "year": "2024",
+      "source": "Križevačka eparhija",
+      "category": "Suradnja",
+      "description": "Objava o kontaktima i razmjeni u Švedskoj.",
+      "description_en": "Report on contacts and exchange in Sweden.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/1729-vladika-stipic-na-ekumenskom-simpoziju-u-svedskoj"
+    },
+    {
+      "title": "Studij započeo akademsku godinu 2024./2025.",
+      "year": "2024",
+      "source": "Križevačka eparhija",
+      "category": "Studij",
+      "description": "Izvještaj o akademskoj godini i ulozi Instituta.",
+      "description_en": "Report on the academic year and the Institute's role.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/1673-studij-istocne-krscanske-duhovnosti-zapoceo-s-akademskom-godinom-2024-2025"
+    },
+    {
+      "title": "Započela akademska godina na Studiju istočne kršćanske duhovnosti",
+      "year": "2024",
+      "source": "IKA",
+      "category": "Studij",
+      "description": "Vijest o upisima i uvodnom predavanju u listopadu 2024.",
+      "description_en": "News on enrolment and the opening lecture, October 2024.",
+      "url": "https://ika.hkm.hr/novosti/zapocela-nova-akademska-godina-na-studiju-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "O. Livio Marijan održao predavanje na Studiju",
+      "year": "2024",
+      "source": "IKA",
+      "category": "Studij",
+      "description": "Prikaz predavanja iz Uvoda u liturgiku u siječnju 2024.",
+      "description_en": "Report on a lecture in Introduction to Liturgy, January 2024.",
+      "url": "https://ika.hkm.hr/novosti/o-livio-marijan-odrzao-predavanje-na-studiju-za-istocnu-krscansku-duhovnost/"
+    },
+    {
+      "title": "Predavanje na Studiju istočne kršćanske duhovnosti",
+      "year": "2024",
+      "source": "Križevačka eparhija",
+      "category": "Studij",
+      "description": "Prikaz predavanja iz liturgike.",
+      "description_en": "Report on a liturgy lecture.",
+      "url": "https://www.krizevacka-eparhija.com/index.php/arhiva/vijesti-2021/1529-predavanje-na-studiju-istocne-krscanske-duhovnosti"
+    },
+    {
+      "title": "Križevačka eparhija otvara Studij istočne kršćanske duhovnosti",
+      "year": "2023",
+      "source": "IKA",
+      "category": "Studij",
+      "description": "Najava početka trogodišnjeg programa Studija.",
+      "description_en": "Announcement of the three-year programme.",
+      "url": "https://ika.hkm.hr/novosti/krizevacka-eparhija-otvara-studij-istocne-krscanske-duhovnosti/"
+    },
+    {
+      "title": "Institut Sveti Ivan Zlatousti – javni podaci",
+      "year": "2026",
+      "source": "Fina Info.BIZ",
+      "category": "Registar",
+      "description": "Javno dostupna evidencija neprofitne organizacije.",
+      "description_en": "Public record of the non-profit organisation.",
+      "url": "https://infobiz.fina.hr/neprofitni/institut-sv-i-z/OIB-41214716365"
+    },
+    {
+      "title": "Institut Sv. I. Z. – javni poslovni podaci",
+      "year": "2026",
+      "source": "CompanyWall",
+      "category": "Registar",
+      "description": "Javno dostupan profil organizacije.",
+      "description_en": "Publicly available profile of the organisation.",
+      "url": "https://www.companywall.hr/tvrtka/institut-sv-i-z/MMTLPNlD"
+    }
+  ]
 }
