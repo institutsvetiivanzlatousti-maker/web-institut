@@ -1,0 +1,858 @@
+# Decap CMS – urednik stranice Instituta Sveti Ivan Zlatousti
+# Prijava urednika: Netlify Identity + Git Gateway (vidi UPUTE.md).
+backend:
+  name: git-gateway
+  branch: main
+
+locale: hr
+site_url: https://institut-zlatousti.hr   # PROMIJENITI na stvarnu domenu
+display_url: https://institut-zlatousti.hr
+logo_url: /img/znak.png
+
+media_folder: uploads
+public_folder: /uploads
+
+collections:
+  - name: sadrzaj
+    label: Novosti, događanja, projekti, dokumenti…
+    description: "Popisi koji se često mijenjaju. Polja s oznakom (EN) su engleska verzija i nisu obavezna: ako su prazna, na engleskoj verziji prikazuje se hrvatski tekst."
+    files:
+      - name: sve
+        label: Svi popisi
+        file: content/sadrzaj.json
+        format: json
+        fields:
+          - label: Novosti
+            name: news
+            widget: list
+            summary: "{{fields.date}} · {{fields.title}}"
+            fields:
+              - {label: Naslov, name: title, widget: string}
+              - {label: Naslov (EN), name: title_en, widget: string, required: false}
+              - {label: Datum, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false}
+              - {label: Kratki opis, name: description, widget: text}
+              - {label: Kratki opis (EN), name: description_en, widget: text, required: false}
+              - {label: Poveznica na cijelu vijest, name: url, widget: string, required: false, hint: "Puna adresa, npr. https://ika.hkm.hr/..."}
+
+          - label: Događanja (uključujući Priča pored Griča)
+            name: events
+            widget: list
+            summary: "{{fields.date}} · {{fields.category}} · {{fields.title}}"
+            fields:
+              - {label: Naziv, name: title, widget: string}
+              - {label: Naziv (EN), name: title_en, widget: string, required: false}
+              - {label: Vrsta, name: category, widget: select, required: false, options: ["Predavanje", "Konferencija", "Duhovni susret", "Priča pored Griča", "Nastava Studija", "Radionica", "Liturgija", "Ostalo"], hint: "Večeri s vrstom „Priča pored Griča“ prikazuju se i na stranici Priče pored Griča."}
+              - {label: Datum, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false}
+              - {label: "Do datuma (za višednevna događanja)", name: date_end, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false, required: false}
+              - {label: Početak, name: time, widget: string, required: false, hint: "Npr. 18:00. Ostavite prazno za cjelodnevno događanje."}
+              - {label: Završetak, name: end_time, widget: string, required: false, hint: "Npr. 20:00"}
+              - {label: Mjesto, name: place, widget: string, required: false}
+              - {label: Opis, name: description, widget: text, required: false}
+              - {label: Opis (EN), name: description_en, widget: text, required: false}
+              - {label: Poveznica, name: url, widget: string, required: false}
+
+          - label: Projekti
+            name: projects
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - {label: Naziv, name: title, widget: string}
+              - {label: Naziv (EN), name: title_en, widget: string, required: false}
+              - {label: Status, name: status, widget: select, options: ["U planu", "Projekt u razvoju", "U tijeku", "Završeno"], default: "U planu"}
+              - {label: Slika, name: image, widget: image, required: false}
+              - {label: Kratki opis, name: description, widget: text}
+              - {label: Kratki opis (EN), name: description_en, widget: text, required: false}
+              - {label: Detaljniji opis, name: details, widget: text, required: false, hint: "Naslov odjeljka počinje s ## , stavka popisa s - . Odlomke odvojite praznim retkom."}
+              - {label: Detaljniji opis (EN), name: details_en, widget: text, required: false}
+              - {label: Poveznica, name: url, widget: string, required: false}
+
+          - label: Dokumenti
+            name: documents
+            widget: list
+            summary: "{{fields.year}} · {{fields.category}} · {{fields.title}}"
+            fields:
+              - {label: Naziv dokumenta, name: title, widget: string}
+              - {label: Naziv (EN), name: title_en, widget: string, required: false}
+              - {label: Vrsta, name: category, widget: select, options: ["Statut", "Plan rada", "Izvješće", "Financijski dokument", "Studij", "Ostalo"], default: "Ostalo"}
+              - {label: Godina, name: year, widget: string, required: false, pattern: ["^(\\d{4})?$", "Upišite godinu, npr. 2025"]}
+              - {label: Datum objave, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false, required: false}
+              - {label: Datoteka (PDF ili Word), name: file, widget: file, required: false, media_folder: "/uploads/dokumenti", public_folder: "/uploads/dokumenti"}
+              - {label: Ili poveznica na dokument, name: url, widget: string, required: false}
+              - {label: Kratki opis, name: description, widget: text, required: false}
+              - {label: Kratki opis (EN), name: description_en, widget: text, required: false}
+
+          - label: Vodstvo Instituta
+            name: leaders
+            widget: list
+            summary: "{{fields.name}} · {{fields.role}}"
+            fields:
+              - {label: Ime i prezime (s titulom), name: name, widget: string}
+              - {label: Uloga, name: role, widget: string}
+              - {label: Uloga (EN), name: role_en, widget: string, required: false}
+              - {label: Fotografija, name: photo, widget: image, required: false}
+              - {label: Kratki životopis, name: bio, widget: text, required: false}
+              - {label: Kratki životopis (EN), name: bio_en, widget: text, required: false}
+              - {label: E-pošta, name: email, widget: string, required: false}
+
+          - label: Fotogalerija
+            name: photos
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - {label: Fotografija, name: image, widget: image, hint: "JPEG, PNG ili WebP, najbolje do 1600 px širine."}
+              - {label: Naslov, name: title, widget: string}
+              - {label: Naslov (EN), name: title_en, widget: string, required: false}
+              - {label: Opis slike za slijepe i slabovidne, name: alt, widget: string, required: false}
+              - {label: Kratki opis, name: description, widget: text, required: false}
+              - {label: Kratki opis (EN), name: description_en, widget: text, required: false}
+
+          - label: Obavijesti Studija
+            name: notices
+            widget: list
+            summary: "{{fields.date}} · {{fields.title}}"
+            fields:
+              - {label: Naslov, name: title, widget: string}
+              - {label: Naslov (EN), name: title_en, widget: string, required: false}
+              - {label: Datum, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false}
+              - {label: Tekst, name: description, widget: text}
+              - {label: Tekst (EN), name: description_en, widget: text, required: false}
+              - {label: Poveznica, name: url, widget: string, required: false}
+
+          - label: Raspored Studija (kalendar nastave)
+            name: schedule
+            widget: list
+            summary: "{{fields.date}} · {{fields.time}} · {{fields.title}}"
+            hint: "Svaki termin pojavljuje se u kalendaru na stranici Studija. Za vikend nastavu upišite datum početka i završetka."
+            fields:
+              - {label: "Naziv (npr. kolegij ili vikend nastave)", name: title, widget: string}
+              - {label: Naziv (EN), name: title_en, widget: string, required: false}
+              - {label: Datum, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false}
+              - {label: "Do datuma (za višednevnu nastavu)", name: date_end, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY.", time_format: false, required: false}
+              - {label: Početak, name: time, widget: string, required: false, hint: "Npr. 9:00", pattern: ["^([01]?\\d|2[0-3])[:.][0-5]\\d$|^$", "Upišite vrijeme u obliku 9:00"]}
+              - {label: Završetak, name: end_time, widget: string, required: false, hint: "Npr. 14:30", pattern: ["^([01]?\\d|2[0-3])[:.][0-5]\\d$|^$", "Upišite vrijeme u obliku 14:30"]}
+              - {label: Mjesto, name: place, widget: string, required: false, default: "Grkokatoličko sjemenište, Zagreb"}
+              - {label: "Opis (predavač, prostorija, napomena)", name: description, widget: text, required: false}
+              - {label: Opis (EN), name: description_en, widget: text, required: false}
+              - {label: Poveznica, name: url, widget: string, required: false}
+
+          - label: Predavači Studija
+            name: teachers
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - {label: Ime i prezime (s titulom), name: title, widget: string}
+              - {label: Uloga ili kolegij, name: role, widget: string, required: false}
+              - {label: Uloga ili kolegij (EN), name: role_en, widget: string, required: false}
+              - {label: Kratki životopis, name: description, widget: text}
+              - {label: Kratki životopis (EN), name: description_en, widget: text, required: false}
+              - {label: Poveznica, name: url, widget: string, required: false}
+
+          - label: Predmeti Studija (plan nastave)
+            name: courses
+            widget: list
+            summary: "{{fields.year}}. godina · {{fields.title}}"
+            fields:
+              - {label: Godina studija, name: year, widget: select, options: [{label: "1. godina", value: "1"}, {label: "2. godina", value: "2"}, {label: "3. godina", value: "3"}]}
+              - {label: Vrsta, name: type, widget: select, options: ["Predmet", "Praktikum", "Seminar"], default: "Predmet"}
+              - {label: Naziv predmeta, name: title, widget: string}
+              - {label: Naziv predmeta (EN), name: title_en, widget: string, required: false}
+              - {label: Opis sadržaja, name: description, widget: text, required: false}
+              - {label: Opis sadržaja (EN), name: description_en, widget: text, required: false}
+
+          - label: Vodstvo Studija
+            name: study_leaders
+            widget: list
+            summary: "{{fields.name}} · {{fields.role}}"
+            fields:
+              - {label: Ime i prezime, name: name, widget: string}
+              - {label: Uloga, name: role, widget: string}
+              - {label: Uloga (EN), name: role_en, widget: string, required: false}
+
+          - label: Društvene mreže
+            name: social
+            widget: object
+            fields:
+              - {label: Facebook, name: facebook, widget: string, required: false}
+              - {label: Instagram, name: instagram, widget: string, required: false}
+
+          - label: Tajništvo SIKD-a
+            name: sikd
+            widget: object
+            hint: "Prikazuje se na stranici Studija i u kontaktu. Sve informacije o Studiju upućuju se Tajništvu."
+            fields:
+              - {label: E-pošta Tajništva, name: email, widget: string, required: false}
+              - {label: Telefon, name: phone, widget: string, required: false}
+              - {label: Adresa, name: address, widget: string, required: false}
+              - {label: Uredovno vrijeme, name: hours, widget: string, required: false, hint: "Npr. pon - pet, 9:00 - 13:00"}
+              - {label: Uredovno vrijeme (EN), name: hours_en, widget: string, required: false}
+              - {label: Napomena, name: note, widget: string, required: false}
+              - {label: Napomena (EN), name: note_en, widget: string, required: false}
+
+  - name: tekstovi
+    label: Tekstovi stranice (hrvatski)
+    description: "Svi tekstovi stranice na hrvatskom, kontakt podaci i podaci za uplatu. Oblikovanje: *kurziv*, **podebljano**, [tekst poveznice](https://adresa). Novi red u polju postaje novi red na stranici. Prazno polje = izvorni tekst."
+    files:
+      - name: svi_tekstovi
+        label: Svi tekstovi, kontakt i uplata
+        file: content/tekstovi.json
+        format: json
+        fields:
+          - label: "Sitni tekstovi sučelja"
+            name: ui
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Preskoci", name: preskoci, widget: string, required: false}
+              - {label: "Kopiraj", name: kopiraj, widget: string, required: false}
+              - {label: "Ucitavam barkod", name: ucitavam_barkod, widget: string, required: false}
+          - label: "Izbornik"
+            name: nav
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Institut", name: institut, widget: string, required: false}
+              - {label: "Pocetna", name: pocetna, widget: string, required: false}
+              - {label: "O", name: o, widget: string, required: false}
+              - {label: "Studij", name: studij, widget: string, required: false}
+              - {label: "Projekti", name: projekti, widget: string, required: false}
+              - {label: "Price", name: price, widget: string, required: false}
+              - {label: "Novosti", name: novosti, widget: string, required: false}
+              - {label: "Dokumenti", name: dokumenti, widget: string, required: false}
+              - {label: "Donacije", name: donacije, widget: string, required: false}
+              - {label: "Kontakt", name: kontakt, widget: string, required: false}
+          - label: "1. Naslovnica"
+            name: pocetna
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Mala oznaka iznad naslova", name: oznaka, widget: string, required: false}
+              - {label: "Glavni naslov", name: naslov, widget: text, required: false}
+              - {label: "Uvodni tekst", name: uvod, widget: text, required: false}
+              - {label: "Prvi gumb", name: gumb1, widget: string, required: false}
+              - {label: "Drugi gumb", name: gumb2, widget: string, required: false}
+              - {label: "Natpis ispod križa", name: natpis, widget: string, required: false}
+              - {label: "Broj1", name: broj1, widget: string, required: false}
+              - {label: "Broj1 opis", name: broj1_opis, widget: string, required: false}
+              - {label: "Broj2", name: broj2, widget: string, required: false}
+              - {label: "Broj2 opis", name: broj2_opis, widget: string, required: false}
+              - {label: "Broj3", name: broj3, widget: string, required: false}
+              - {label: "Broj3 opis", name: broj3_opis, widget: string, required: false}
+              - {label: "Natpis slike", name: natpis_slike, widget: string, required: false}
+              - {label: "O oznaka", name: o_oznaka, widget: string, required: false}
+              - {label: "O naslov", name: o_naslov, widget: text, required: false}
+              - {label: "O tekst", name: o_tekst, widget: text, required: false}
+              - {label: "Znacajka1", name: znacajka1, widget: string, required: false}
+              - {label: "Znacajka1 tekst", name: znacajka1_tekst, widget: string, required: false}
+              - {label: "Znacajka2", name: znacajka2, widget: string, required: false}
+              - {label: "Znacajka2 tekst", name: znacajka2_tekst, widget: string, required: false}
+              - {label: "Znacajka3", name: znacajka3, widget: string, required: false}
+              - {label: "Znacajka3 tekst", name: znacajka3_tekst, widget: string, required: false}
+              - {label: "O poveznica", name: o_poveznica, widget: string, required: false}
+              - {label: "Djel oznaka", name: djel_oznaka, widget: string, required: false}
+              - {label: "Djel naslov", name: djel_naslov, widget: text, required: false}
+              - {label: "Djel opis", name: djel_opis, widget: text, required: false}
+              - {label: "Kartica1", name: kartica1, widget: string, required: false}
+              - {label: "Kartica1 tekst", name: kartica1_tekst, widget: text, required: false}
+              - {label: "Kartica1 poveznica", name: kartica1_poveznica, widget: string, required: false}
+              - {label: "Kartica2", name: kartica2, widget: string, required: false}
+              - {label: "Kartica2 tekst", name: kartica2_tekst, widget: text, required: false}
+              - {label: "Kartica2 poveznica", name: kartica2_poveznica, widget: string, required: false}
+              - {label: "Kartica3", name: kartica3, widget: string, required: false}
+              - {label: "Kartica3 tekst", name: kartica3_tekst, widget: text, required: false}
+              - {label: "Kartica3 poveznica", name: kartica3_poveznica, widget: string, required: false}
+              - {label: "Vijesti oznaka", name: vijesti_oznaka, widget: string, required: false}
+              - {label: "Vijesti naslov", name: vijesti_naslov, widget: text, required: false}
+              - {label: "Vijesti poveznica", name: vijesti_poveznica, widget: string, required: false}
+              - {label: "Mreze oznaka", name: mreze_oznaka, widget: string, required: false}
+              - {label: "Mreze naslov", name: mreze_naslov, widget: text, required: false}
+              - {label: "Mreze opis", name: mreze_opis, widget: text, required: false}
+              - {label: "Facebook opis", name: facebook_opis, widget: text, required: false}
+              - {label: "Instagram opis", name: instagram_opis, widget: text, required: false}
+          - label: "2. O Institutu"
+            name: o
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Uvod", name: uvod, widget: text, required: false}
+              - {label: "Povijest oznaka", name: povijest_oznaka, widget: string, required: false}
+              - {label: "Povijest naslov", name: povijest_naslov, widget: text, required: false}
+              - {label: "Povijest tekst", name: povijest_tekst, widget: text, required: false}
+              - {label: "Crta1 godina", name: crta1_godina, widget: string, required: false}
+              - {label: "Crta1", name: crta1, widget: string, required: false}
+              - {label: "Crta2 godina", name: crta2_godina, widget: string, required: false}
+              - {label: "Crta2", name: crta2, widget: string, required: false}
+              - {label: "Crta3 godina", name: crta3_godina, widget: string, required: false}
+              - {label: "Crta3", name: crta3, widget: string, required: false}
+              - {label: "Misija oznaka", name: misija_oznaka, widget: string, required: false}
+              - {label: "Misija naslov", name: misija_naslov, widget: string, required: false}
+              - {label: "Misija tekst", name: misija_tekst, widget: text, required: false}
+              - {label: "Vizija oznaka", name: vizija_oznaka, widget: string, required: false}
+              - {label: "Vizija naslov", name: vizija_naslov, widget: string, required: false}
+              - {label: "Vizija tekst", name: vizija_tekst, widget: text, required: false}
+              - {label: "Zastitnik oznaka", name: zastitnik_oznaka, widget: string, required: false}
+              - {label: "Zastitnik naslov", name: zastitnik_naslov, widget: string, required: false}
+              - {label: "Zastitnik tekst", name: zastitnik_tekst, widget: text, required: false}
+              - {label: "Vodstvo oznaka", name: vodstvo_oznaka, widget: string, required: false}
+              - {label: "Vodstvo naslov", name: vodstvo_naslov, widget: text, required: false}
+              - {label: "Vodstvo opis", name: vodstvo_opis, widget: text, required: false}
+          - label: "3. Studij (SIKD)"
+            name: studij
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Uvod", name: uvod, widget: text, required: false}
+              - {label: "Gumb", name: gumb, widget: string, required: false}
+              - {label: "Vodic", name: vodic, widget: string, required: false}
+              - {label: "O oznaka", name: o_oznaka, widget: string, required: false}
+              - {label: "O naslov", name: o_naslov, widget: text, required: false}
+              - {label: "O tekst", name: o_tekst, widget: text, required: false}
+              - {label: "Ukratko naslov", name: ukratko_naslov, widget: string, required: false}
+              - {label: "Ukratko tekst", name: ukratko_tekst, widget: text, required: false}
+              - {label: "Podatak1", name: podatak1, widget: string, required: false}
+              - {label: "Podatak1 vrijednost", name: podatak1_vrijednost, widget: string, required: false}
+              - {label: "Podatak2", name: podatak2, widget: string, required: false}
+              - {label: "Podatak2 vrijednost", name: podatak2_vrijednost, widget: string, required: false}
+              - {label: "Podatak3", name: podatak3, widget: string, required: false}
+              - {label: "Podatak3 vrijednost", name: podatak3_vrijednost, widget: string, required: false}
+              - {label: "Podatak6", name: podatak6, widget: string, required: false}
+              - {label: "Podatak6 vrijednost", name: podatak6_vrijednost, widget: string, required: false}
+              - {label: "Podatak4", name: podatak4, widget: string, required: false}
+              - {label: "Podatak4 vrijednost", name: podatak4_vrijednost, widget: string, required: false}
+              - {label: "Podatak5", name: podatak5, widget: string, required: false}
+              - {label: "Podatak5 vrijednost", name: podatak5_vrijednost, widget: string, required: false}
+              - {label: "Program oznaka", name: program_oznaka, widget: string, required: false}
+              - {label: "Program naslov", name: program_naslov, widget: text, required: false}
+              - {label: "Program opis", name: program_opis, widget: text, required: false}
+              - {label: "Podrucje1", name: podrucje1, widget: string, required: false}
+              - {label: "Podrucje1 tekst", name: podrucje1_tekst, widget: text, required: false}
+              - {label: "Podrucje2", name: podrucje2, widget: string, required: false}
+              - {label: "Podrucje2 tekst", name: podrucje2_tekst, widget: text, required: false}
+              - {label: "Podrucje3", name: podrucje3, widget: string, required: false}
+              - {label: "Podrucje3 tekst", name: podrucje3_tekst, widget: text, required: false}
+              - {label: "Podrucje4", name: podrucje4, widget: string, required: false}
+              - {label: "Podrucje4 tekst", name: podrucje4_tekst, widget: text, required: false}
+              - {label: "Misija oznaka", name: misija_oznaka, widget: string, required: false}
+              - {label: "Misija tekst", name: misija_tekst, widget: text, required: false, hint: "Naslov odjeljka počinje s ## , stavka popisa s - . Odlomke odvojite praznim retkom."}
+              - {label: "Vizija oznaka", name: vizija_oznaka, widget: string, required: false}
+              - {label: "Vizija tekst", name: vizija_tekst, widget: text, required: false, hint: "Naslov odjeljka počinje s ## , stavka popisa s - . Odlomke odvojite praznim retkom."}
+              - {label: "Plan oznaka", name: plan_oznaka, widget: string, required: false}
+              - {label: "Plan naslov", name: plan_naslov, widget: text, required: false}
+              - {label: "Plan opis", name: plan_opis, widget: text, required: false}
+              - {label: "Godina1", name: godina1, widget: string, required: false}
+              - {label: "Godina2", name: godina2, widget: string, required: false}
+              - {label: "Godina3", name: godina3, widget: string, required: false}
+              - {label: "Treca napomena", name: treca_napomena, widget: text, required: false}
+              - {label: "Vodstvo oznaka", name: vodstvo_oznaka, widget: string, required: false}
+              - {label: "Vodstvo naslov", name: vodstvo_naslov, widget: text, required: false}
+              - {label: "Nastava oznaka", name: nastava_oznaka, widget: string, required: false}
+              - {label: "Nastava naslov", name: nastava_naslov, widget: text, required: false}
+              - {label: "Raspored naslov", name: raspored_naslov, widget: string, required: false}
+              - {label: "Kal danas", name: kal_danas, widget: string, required: false}
+              - {label: "Kal sve", name: kal_sve, widget: string, required: false}
+              - {label: "Kal napomena", name: kal_napomena, widget: text, required: false}
+              - {label: "Predavaci naslov", name: predavaci_naslov, widget: string, required: false}
+              - {label: "Prijave oznaka", name: prijave_oznaka, widget: string, required: false}
+              - {label: "Prijave naslov", name: prijave_naslov, widget: text, required: false}
+              - {label: "Prijave tekst", name: prijave_tekst, widget: text, required: false}
+          - label: "4. Projekti"
+            name: projekti
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Uvod", name: uvod, widget: text, required: false}
+              - {label: "Cta oznaka", name: cta_oznaka, widget: string, required: false}
+              - {label: "Cta naslov", name: cta_naslov, widget: text, required: false}
+              - {label: "Cta tekst", name: cta_tekst, widget: text, required: false}
+              - {label: "Cta gumb1", name: cta_gumb1, widget: string, required: false}
+              - {label: "Cta gumb2", name: cta_gumb2, widget: string, required: false}
+          - label: "5. Priče ispod Griča"
+            name: price
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Uvod", name: uvod, widget: text, required: false}
+              - {label: "O oznaka", name: o_oznaka, widget: string, required: false}
+              - {label: "O naslov", name: o_naslov, widget: text, required: false}
+              - {label: "O tekst", name: o_tekst, widget: text, required: false}
+              - {label: "Znacajka1", name: znacajka1, widget: string, required: false}
+              - {label: "Znacajka1 tekst", name: znacajka1_tekst, widget: string, required: false}
+              - {label: "Znacajka2", name: znacajka2, widget: string, required: false}
+              - {label: "Znacajka2 tekst", name: znacajka2_tekst, widget: string, required: false}
+              - {label: "Znacajka3", name: znacajka3, widget: string, required: false}
+              - {label: "Znacajka3 tekst", name: znacajka3_tekst, widget: string, required: false}
+              - {label: "Vecer oznaka", name: vecer_oznaka, widget: string, required: false}
+              - {label: "Vecer naslov", name: vecer_naslov, widget: text, required: false}
+              - {label: "Arhiva naslov", name: arhiva_naslov, widget: string, required: false}
+          - label: "6. Novosti i događanja"
+            name: novosti
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Uvod", name: uvod, widget: text, required: false}
+              - {label: "Dog oznaka", name: dog_oznaka, widget: string, required: false}
+              - {label: "Dog naslov", name: dog_naslov, widget: text, required: false}
+              - {label: "Dog opis", name: dog_opis, widget: text, required: false}
+              - {label: "Prikaz kalendar", name: prikaz_kalendar, widget: string, required: false}
+              - {label: "Prikaz popis", name: prikaz_popis, widget: string, required: false}
+              - {label: "Kal danas", name: kal_danas, widget: string, required: false}
+              - {label: "Kal sve", name: kal_sve, widget: string, required: false}
+              - {label: "Kal napomena", name: kal_napomena, widget: text, required: false}
+              - {label: "Tab nadolazeca", name: tab_nadolazeca, widget: string, required: false}
+              - {label: "Tab prosla", name: tab_prosla, widget: string, required: false}
+              - {label: "Vij oznaka", name: vij_oznaka, widget: string, required: false}
+              - {label: "Vij naslov", name: vij_naslov, widget: text, required: false}
+              - {label: "Vij opis", name: vij_opis, widget: text, required: false}
+              - {label: "Vise", name: vise, widget: string, required: false}
+              - {label: "Gal oznaka", name: gal_oznaka, widget: string, required: false}
+              - {label: "Gal naslov", name: gal_naslov, widget: text, required: false}
+              - {label: "Gal opis", name: gal_opis, widget: text, required: false}
+          - label: "7. Dokumenti"
+            name: dokumenti
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Uvod", name: uvod, widget: text, required: false}
+              - {label: "Godina", name: godina, widget: string, required: false}
+          - label: "8. Donacije"
+            name: donacije
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Sub oznaka", name: sub_oznaka, widget: string, required: false}
+              - {label: "Sub naslov", name: sub_naslov, widget: text, required: false}
+              - {label: "Sub uvod", name: sub_uvod, widget: text, required: false}
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Opis", name: opis, widget: text, required: false}
+              - {label: "Svrha1", name: svrha1, widget: string, required: false}
+              - {label: "Svrha1 tekst", name: svrha1_tekst, widget: string, required: false}
+              - {label: "Svrha2", name: svrha2, widget: string, required: false}
+              - {label: "Svrha2 tekst", name: svrha2_tekst, widget: string, required: false}
+              - {label: "Svrha3", name: svrha3, widget: string, required: false}
+              - {label: "Svrha3 tekst", name: svrha3_tekst, widget: string, required: false}
+              - {label: "Korak1", name: korak1, widget: string, required: false}
+              - {label: "Korak2", name: korak2, widget: text, required: false}
+              - {label: "Korak3", name: korak3, widget: string, required: false}
+              - {label: "Zahvala", name: zahvala, widget: text, required: false}
+              - {label: "Kartica oznaka", name: kartica_oznaka, widget: string, required: false}
+              - {label: "Iznos", name: iznos, widget: string, required: false}
+              - {label: "Vlastiti", name: vlastiti, widget: string, required: false}
+              - {label: "Svrha", name: svrha, widget: string, required: false}
+              - {label: "Primatelj", name: primatelj, widget: string, required: false}
+              - {label: "Model", name: model, widget: string, required: false}
+              - {label: "Model napomena", name: model_napomena, widget: string, required: false}
+          - label: "9. Kontakt"
+            name: kontakt
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Sub oznaka", name: sub_oznaka, widget: string, required: false}
+              - {label: "Sub naslov", name: sub_naslov, widget: text, required: false}
+              - {label: "Sub uvod", name: sub_uvod, widget: text, required: false}
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Opis", name: opis, widget: text, required: false}
+              - {label: "Napomena o Tajništvu SIKD-a", name: sikd_napomena, widget: text, required: false}
+              - {label: "Email oznaka", name: email_oznaka, widget: string, required: false}
+              - {label: "Adresa oznaka", name: adresa_oznaka, widget: string, required: false}
+              - {label: "Drzava", name: drzava, widget: string, required: false}
+              - {label: "Obrazac oznaka", name: obrazac_oznaka, widget: string, required: false}
+              - {label: "Obrazac naslov", name: obrazac_naslov, widget: string, required: false}
+              - {label: "F ime", name: f_ime, widget: string, required: false}
+              - {label: "F email", name: f_email, widget: string, required: false}
+              - {label: "F tema", name: f_tema, widget: string, required: false}
+              - {label: "T1", name: t1, widget: string, required: false}
+              - {label: "T2", name: t2, widget: string, required: false}
+              - {label: "T3", name: t3, widget: string, required: false}
+              - {label: "T4", name: t4, widget: string, required: false}
+              - {label: "T5", name: t5, widget: string, required: false}
+              - {label: "F studij", name: f_studij, widget: text, required: false}
+              - {label: "F poruka", name: f_poruka, widget: string, required: false}
+              - {label: "Tekst privole u obrascu", name: f_privola, widget: text, required: false}
+              - {label: "F posalji", name: f_posalji, widget: string, required: false}
+              - {label: "Karta naslov", name: karta_naslov, widget: string, required: false}
+              - {label: "Upute", name: upute, widget: string, required: false}
+              - {label: "Karta gumb", name: karta_gumb, widget: string, required: false}
+              - {label: "Karta otvori", name: karta_otvori, widget: string, required: false}
+              - {label: "Karta privola", name: karta_privola, widget: text, required: false}
+          - label: "Privatnost i kolačići"
+            name: privatnost
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false}
+              - {label: "Naslov", name: naslov, widget: text, required: false}
+              - {label: "Uvod", name: uvod, widget: text, required: false}
+              - {label: "Cijeli tekst", name: tekst, widget: text, required: false, hint: "Naslov odjeljka počinje s ## , stavka popisa s - . Odlomke odvojite praznim retkom."}
+          - label: "Podnožje"
+            name: podnozje
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Opis", name: opis, widget: text, required: false}
+              - {label: "Istrazite", name: istrazite, widget: string, required: false}
+              - {label: "Lokacija", name: lokacija, widget: string, required: false}
+              - {label: "Privatnost", name: privatnost, widget: string, required: false}
+              - {label: "Prijava", name: prijava, widget: string, required: false}
+              - {label: "Prava", name: prava, widget: string, required: false}
+              - {label: "Geslo", name: geslo, widget: string, required: false}
+          - label: "Kontakt podaci Instituta"
+            name: kontakt_podaci
+            widget: object
+            collapsed: true
+            hint: "Mijenjaju se na svim mjestima na stranici (kontakt, podnožje, karta, privatnost)."
+            fields:
+              - {label: "E-pošta", name: email, widget: string}
+              - {label: "Ulica i broj", name: ulica, widget: string}
+              - {label: "Poštanski broj i mjesto", name: mjesto, widget: string}
+              - {label: "OIB", name: oib, widget: string}
+          - label: "Podaci za uplatu i barkod"
+            name: uplata
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Primatelj", name: primatelj, widget: string}
+              - {label: "Adresa primatelja", name: adresa, widget: string}
+              - {label: "IBAN (bez razmaka)", name: iban, widget: string, pattern: ["^HR\\d{19}$", "IBAN mora imati oblik HR i 19 znamenki, bez razmaka"]}
+              - {label: "Banka", name: banka, widget: string, required: false}
+              - {label: "Model", name: model, widget: string, default: "HR99"}
+              - {label: "Naziv u barkodu (najviše 25 znakova)", name: barkod_naziv, widget: string, pattern: ["^.{1,25}$", "Najviše 25 znakova"]}
+              - {label: "Ulica u barkodu (najviše 25 znakova)", name: barkod_ulica, widget: string, pattern: ["^.{0,25}$", "Najviše 25 znakova"]}
+              - {label: "Mjesto u barkodu (najviše 27 znakova)", name: barkod_mjesto, widget: string, pattern: ["^.{0,27}$", "Najviše 27 znakova"]}
+              - {label: "Šifra namjene", name: sifra_namjene, widget: string, default: "CHAR", hint: "CHAR = dobrotvorno plaćanje"}
+              - {label: "Ponuđeni iznosi (€)", name: iznosi, widget: list, field: {label: Iznos, name: iznos, widget: number, value_type: int, min: 1}}
+              - {label: "Unaprijed odabrani iznos (€)", name: zadani_iznos, widget: number, value_type: int, min: 1}
+              - {label: "Svrhe donacije (najviše 35 znakova)", name: svrhe, widget: list, field: {label: Svrha, name: svrha, widget: string, pattern: ["^.{1,35}$", "Najviše 35 znakova"]}}
+
+  - name: texts_en
+    label: Texts (English)
+    description: "English version of all texts. An empty field shows the built-in English text. Below each field you can see the Croatian original."
+    files:
+      - name: all_texts_en
+        label: All texts (English)
+        file: content/tekstovi.en.json
+        format: json
+        fields:
+          - label: "Interface texts"
+            name: ui
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Preskoci", name: preskoci, widget: string, required: false, hint: "HR: Preskoči na sadržaj"}
+              - {label: "Kopiraj", name: kopiraj, widget: string, required: false, hint: "HR: Kopiraj"}
+              - {label: "Ucitavam barkod", name: ucitavam_barkod, widget: string, required: false, hint: "HR: Učitavam barkod…"}
+          - label: "Menu"
+            name: nav
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Institut", name: institut, widget: string, required: false, hint: "HR: Institut"}
+              - {label: "Pocetna", name: pocetna, widget: string, required: false, hint: "HR: Naslovnica"}
+              - {label: "O", name: o, widget: string, required: false, hint: "HR: O Institutu"}
+              - {label: "Studij", name: studij, widget: string, required: false, hint: "HR: Studij"}
+              - {label: "Projekti", name: projekti, widget: string, required: false, hint: "HR: Projekti"}
+              - {label: "Price", name: price, widget: string, required: false, hint: "HR: Priča pored Griča"}
+              - {label: "Novosti", name: novosti, widget: string, required: false, hint: "HR: Novosti"}
+              - {label: "Dokumenti", name: dokumenti, widget: string, required: false, hint: "HR: Dokumenti"}
+              - {label: "Donacije", name: donacije, widget: string, required: false, hint: "HR: Donacije"}
+              - {label: "Kontakt", name: kontakt, widget: string, required: false, hint: "HR: Kontakt"}
+          - label: "1. Home"
+            name: pocetna
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Mala oznaka iznad naslova", name: oznaka, widget: string, required: false, hint: "HR: Vjera · Znanje · Tradicija"}
+              - {label: "Glavni naslov", name: naslov, widget: text, required: false, hint: "HR: Baština koja *nadahnjuje.* Znanje koje povezuje."}
+              - {label: "Uvodni tekst", name: uvod, widget: text, required: false, hint: "HR: Promičemo bogatstvo istočne kršćanske duhovnosti kroz obrazovanje, susrete, istraživanje i očuvanje duhovne i kulturne baštine."}
+              - {label: "Prvi gumb", name: gumb1, widget: string, required: false, hint: "HR: Upoznajte Institut ↗"}
+              - {label: "Drugi gumb", name: gumb2, widget: string, required: false, hint: "HR: Studij duhovnosti →"}
+              - {label: "Natpis ispod križa", name: natpis, widget: string, required: false, hint: "HR: Lux ex Oriente"}
+              - {label: "Broj1", name: broj1, widget: string, required: false, hint: "HR: 2024."}
+              - {label: "Broj1 opis", name: broj1_opis, widget: string, required: false, hint: "HR: godina osnivanja Instituta"}
+              - {label: "Broj2", name: broj2, widget: string, required: false, hint: "HR: 3"}
+              - {label: "Broj2 opis", name: broj2_opis, widget: string, required: false, hint: "HR: godine obrazovnog programa SIKD-a"}
+              - {label: "Broj3", name: broj3, widget: string, required: false, hint: "HR: 2026."}
+              - {label: "Broj3 opis", name: broj3_opis, widget: string, required: false, hint: "HR: prve uspješne obrane diplomskih radova"}
+              - {label: "Natpis slike", name: natpis_slike, widget: string, required: false, hint: "HR: Duhovnost. Zajedništvo. Baština."}
+              - {label: "O oznaka", name: o_oznaka, widget: string, required: false, hint: "HR: Tko smo mi"}
+              - {label: "O naslov", name: o_naslov, widget: text, required: false, hint: "HR: Prostor susreta istočne kršćanske tradicije i suvremenog čovjeka."}
+              - {label: "O tekst", name: o_tekst, widget: text, required: false, hint: "HR: Institut Sveti Ivan Zlatousti promiče istočnu kršćansku duhovnost, teološku i liturgijsku kulturu te očuvanje duhovne baštine. Kroz suradnju, obrazovne prog"}
+              - {label: "Znacajka1", name: znacajka1, widget: string, required: false, hint: "HR: Obrazovanje"}
+              - {label: "Znacajka1 tekst", name: znacajka1_tekst, widget: string, required: false, hint: "HR: Predavanja, seminari i studij"}
+              - {label: "Znacajka2", name: znacajka2, widget: string, required: false, hint: "HR: Baština"}
+              - {label: "Znacajka2 tekst", name: znacajka2_tekst, widget: string, required: false, hint: "HR: Očuvanje tradicije i kulture"}
+              - {label: "Znacajka3", name: znacajka3, widget: string, required: false, hint: "HR: Zajednica"}
+              - {label: "Znacajka3 tekst", name: znacajka3_tekst, widget: string, required: false, hint: "HR: Susreti i duhovni rast"}
+              - {label: "O poveznica", name: o_poveznica, widget: string, required: false, hint: "HR: Više o Institutu ↗"}
+              - {label: "Djel oznaka", name: djel_oznaka, widget: string, required: false, hint: "HR: Djelatnosti Instituta"}
+              - {label: "Djel naslov", name: djel_naslov, widget: text, required: false, hint: "HR: Učimo, istražujemo i čuvamo."}
+              - {label: "Djel opis", name: djel_opis, widget: text, required: false, hint: "HR: Naše aktivnosti usmjerene su prema obrazovanju, produbljivanju duhovnosti i očuvanju živog nasljeđa kršćanskoga Istoka."}
+              - {label: "Kartica1", name: kartica1, widget: string, required: false, hint: "HR: Studij istočne kršćanske duhovnosti"}
+              - {label: "Kartica1 tekst", name: kartica1_tekst, widget: text, required: false, hint: "HR: Trogodišnji obrazovni program koji povezuje biblijsku i otačku teologiju, liturgiku, ikonografiju i duhovnu tradiciju."}
+              - {label: "Kartica1 poveznica", name: kartica1_poveznica, widget: string, required: false, hint: "HR: Upoznajte Studij ↗"}
+              - {label: "Kartica2", name: kartica2, widget: string, required: false, hint: "HR: Priča pored Griča"}
+              - {label: "Kartica2 tekst", name: kartica2_tekst, widget: text, required: false, hint: "HR: Tematske ekumenske večeri Studija na kojima se susreću vjernici različitih kršćanskih tradicija u razgovoru i zajedništvu."}
+              - {label: "Kartica2 poveznica", name: kartica2_poveznica, widget: string, required: false, hint: "HR: Pogledajte večeri ↗"}
+              - {label: "Kartica3", name: kartica3, widget: string, required: false, hint: "HR: Projekti i baština"}
+              - {label: "Kartica3 tekst", name: kartica3_tekst, widget: text, required: false, hint: "HR: Čuvari kulturne baštine, Duhovni centar Sošice i međunarodna suradnja: projekti koji povezuju duhovnost, mlade i baštinu."}
+              - {label: "Kartica3 poveznica", name: kartica3_poveznica, widget: string, required: false, hint: "HR: Pogledajte projekte ↗"}
+              - {label: "Vijesti oznaka", name: vijesti_oznaka, widget: string, required: false, hint: "HR: Iz života Instituta"}
+              - {label: "Vijesti naslov", name: vijesti_naslov, widget: text, required: false, hint: "HR: Najnovije vijesti."}
+              - {label: "Vijesti poveznica", name: vijesti_poveznica, widget: string, required: false, hint: "HR: Sve novosti i događanja →"}
+              - {label: "Mreze oznaka", name: mreze_oznaka, widget: string, required: false, hint: "HR: Pratite naš rad"}
+              - {label: "Mreze naslov", name: mreze_naslov, widget: text, required: false, hint: "HR: Budimo povezani."}
+              - {label: "Mreze opis", name: mreze_opis, widget: text, required: false, hint: "HR: Novosti i trenuci iz života Instituta i Studija istočne kršćanske duhovnosti na društvenim mrežama."}
+              - {label: "Facebook opis", name: facebook_opis, widget: text, required: false, hint: "HR: Stranica Studija istočne kršćanske duhovnosti s informacijama o događanjima i predavanjima."}
+              - {label: "Instagram opis", name: instagram_opis, widget: text, required: false, hint: "HR: Fotografije i priče s predavanja, susreta i drugih aktivnosti."}
+          - label: "2. About"
+            name: o
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: O Institutu"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Prostor susreta *kršćanskoga Istoka* i suvremenog čovjeka."}
+              - {label: "Uvod", name: uvod, widget: text, required: false, hint: "HR: Povijest, misija, vizija i vodstvo Instituta Sveti Ivan Zlatousti."}
+              - {label: "Povijest oznaka", name: povijest_oznaka, widget: string, required: false, hint: "HR: Povijest"}
+              - {label: "Povijest naslov", name: povijest_naslov, widget: text, required: false, hint: "HR: Kako smo nastali."}
+              - {label: "Povijest tekst", name: povijest_tekst, widget: text, required: false, hint: "HR: Institut Sveti Ivan Zlatousti osnovan je izbornom skupštinom 24. siječnja 2024. godine, uz blagoslov križevačkog vladike mons. Milana Stipića. Križevačka ep"}
+              - {label: "Crta1 godina", name: crta1_godina, widget: string, required: false, hint: "HR: 1. 1. 2024."}
+              - {label: "Crta1", name: crta1, widget: string, required: false, hint: "HR: Križevački vladika osniva Studij istočne kršćanske duhovnosti"}
+              - {label: "Crta2 godina", name: crta2_godina, widget: string, required: false, hint: "HR: 24. 1. 2024."}
+              - {label: "Crta2", name: crta2, widget: string, required: false, hint: "HR: Izborna skupština osniva Institut Sveti Ivan Zlatousti"}
+              - {label: "Crta3 godina", name: crta3_godina, widget: string, required: false, hint: "HR: 2026."}
+              - {label: "Crta3", name: crta3, widget: string, required: false, hint: "HR: Prve obrane diplomskih radova na Studiju"}
+              - {label: "Misija oznaka", name: misija_oznaka, widget: string, required: false, hint: "HR: Misija"}
+              - {label: "Misija naslov", name: misija_naslov, widget: string, required: false, hint: "HR: Zašto postojimo"}
+              - {label: "Misija tekst", name: misija_tekst, widget: text, required: false, hint: "HR: Promicati istočnu kršćansku duhovnost, teološku i liturgijsku kulturu te očuvati duhovnu baštinu, povezujući znanje, vjeru i djelovanje u zajednici."}
+              - {label: "Vizija oznaka", name: vizija_oznaka, widget: string, required: false, hint: "HR: Vizija"}
+              - {label: "Vizija naslov", name: vizija_naslov, widget: string, required: false, hint: "HR: Kamo idemo"}
+              - {label: "Vizija tekst", name: vizija_tekst, widget: text, required: false, hint: "HR: Biti mjesto na kojem se bogatstvo kršćanskoga Istoka živi, proučava i prenosi novim naraštajima, u otvorenom susretu s drugim kršćanskim tradicijama i suvre"}
+              - {label: "Zastitnik oznaka", name: zastitnik_oznaka, widget: string, required: false, hint: "HR: Zaštitnik"}
+              - {label: "Zastitnik naslov", name: zastitnik_naslov, widget: string, required: false, hint: "HR: Sveti Ivan Zlatousti"}
+              - {label: "Zastitnik tekst", name: zastitnik_tekst, widget: text, required: false, hint: "HR: Carigradski nadbiskup i crkveni naučitelj (oko 349.–407.), nazvan Zlatoustim zbog snage svojih propovijedi. Njegovo ime nosi Božanska liturgija koja se i da"}
+              - {label: "Vodstvo oznaka", name: vodstvo_oznaka, widget: string, required: false, hint: "HR: Vodstvo"}
+              - {label: "Vodstvo naslov", name: vodstvo_naslov, widget: text, required: false, hint: "HR: Tko vodi Institut."}
+              - {label: "Vodstvo opis", name: vodstvo_opis, widget: text, required: false, hint: "HR: Članovi uprave i suradnici koji brinu o radu Instituta."}
+          - label: "3. Study (SIKD)"
+            name: studij
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: Studij istočne kršćanske duhovnosti · SIKD"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Trogodišnji put kroz *duhovnost kršćanskoga Istoka.*"}
+              - {label: "Uvod", name: uvod, widget: text, required: false, hint: "HR: Obrazovni program koji povezuje biblijsku i otačku teologiju, liturgiku, ikonografiju i duhovnu tradiciju, uz vikend nastavu u Zagrebu."}
+              - {label: "Gumb", name: gumb, widget: string, required: false, hint: "HR: Prijave i informacije ↓"}
+              - {label: "Vodic", name: vodic, widget: string, required: false, hint: "HR: Vodič kroz Studij (PDF) ↗"}
+              - {label: "O oznaka", name: o_oznaka, widget: string, required: false, hint: "HR: Program"}
+              - {label: "O naslov", name: o_naslov, widget: text, required: false, hint: "HR: Znanje koje se živi."}
+              - {label: "O tekst", name: o_tekst, widget: text, required: false, hint: "HR: Studij istočne kršćanske duhovnosti (SIKD) osnovao je križevački vladika mons. Milan Stipić odlukom od 1. siječnja 2024., kako bi vjernicima laicima omogući"}
+              - {label: "Ukratko naslov", name: ukratko_naslov, widget: string, required: false, hint: "HR: Ukratko"}
+              - {label: "Ukratko tekst", name: ukratko_tekst, widget: text, required: false, hint: "HR: Osnovni podaci o programu. Za sve informacije o Studiju obratite se Tajništvu SIKD-a."}
+              - {label: "Podatak1", name: podatak1, widget: string, required: false, hint: "HR: Trajanje"}
+              - {label: "Podatak1 vrijednost", name: podatak1_vrijednost, widget: string, required: false, hint: "HR: 3 godine"}
+              - {label: "Podatak2", name: podatak2, widget: string, required: false, hint: "HR: Nastava"}
+              - {label: "Podatak2 vrijednost", name: podatak2_vrijednost, widget: string, required: false, hint: "HR: Vikendom"}
+              - {label: "Podatak3", name: podatak3, widget: string, required: false, hint: "HR: Mjesto"}
+              - {label: "Podatak3 vrijednost", name: podatak3_vrijednost, widget: string, required: false, hint: "HR: Grkokatoličko sjemenište, Zagreb"}
+              - {label: "Podatak6", name: podatak6, widget: string, required: false, hint: "HR: Nositelj"}
+              - {label: "Podatak6 vrijednost", name: podatak6_vrijednost, widget: string, required: false, hint: "HR: Križevačka eparhija"}
+              - {label: "Podatak4", name: podatak4, widget: string, required: false, hint: "HR: Završetak"}
+              - {label: "Podatak4 vrijednost", name: podatak4_vrijednost, widget: string, required: false, hint: "HR: Diplomski rad uz mentorstvo"}
+              - {label: "Podatak5", name: podatak5, widget: string, required: false, hint: "HR: Informacije"}
+              - {label: "Podatak5 vrijednost", name: podatak5_vrijednost, widget: string, required: false, hint: "HR: Tajništvo SIKD-a"}
+              - {label: "Program oznaka", name: program_oznaka, widget: string, required: false, hint: "HR: Područja"}
+              - {label: "Program naslov", name: program_naslov, widget: text, required: false, hint: "HR: Što se uči."}
+              - {label: "Program opis", name: program_opis, widget: text, required: false, hint: "HR: Program obuhvaća četiri međusobno povezana područja."}
+              - {label: "Podrucje1", name: podrucje1, widget: string, required: false, hint: "HR: Biblijska i otačka teologija"}
+              - {label: "Podrucje1 tekst", name: podrucje1_tekst, widget: text, required: false, hint: "HR: Sveto pismo u tumačenju crkvenih otaca, s posebnim naglaskom na baštinu svetog Ivana Zlatoustog."}
+              - {label: "Podrucje2", name: podrucje2, widget: string, required: false, hint: "HR: Liturgika"}
+              - {label: "Podrucje2 tekst", name: podrucje2_tekst, widget: text, required: false, hint: "HR: Povijest, teologija i praksa bizantske liturgijske tradicije."}
+              - {label: "Podrucje3", name: podrucje3, widget: string, required: false, hint: "HR: Ikonografija"}
+              - {label: "Podrucje3 tekst", name: podrucje3_tekst, widget: text, required: false, hint: "HR: Teologija i jezik ikone kao prozora u otajstvo vjere."}
+              - {label: "Podrucje4", name: podrucje4, widget: string, required: false, hint: "HR: Duhovna tradicija"}
+              - {label: "Podrucje4 tekst", name: podrucje4_tekst, widget: text, required: false, hint: "HR: Molitva, asketika i duhovni život prema iskustvu kršćanskoga Istoka."}
+              - {label: "Misija oznaka", name: misija_oznaka, widget: string, required: false, hint: "HR: Misija Studija"}
+              - {label: "Misija tekst", name: misija_tekst, widget: text, required: false, hint: "HR: - Pružiti studentima bolje razumijevanje istočne kršćanske duhovnosti, njezine povijesti, teologije i prakse. - Potaknuti studente na istraživanje i razmišl"}
+              - {label: "Vizija oznaka", name: vizija_oznaka, widget: string, required: false, hint: "HR: Vizija Studija"}
+              - {label: "Vizija tekst", name: vizija_tekst, widget: text, required: false, hint: "HR: - Postati vodeći program za proučavanje istočne kršćanske duhovnosti koji će oblikovati buduće stručnjake i vođe u tom području. - Potaknuti pozitivne promj"}
+              - {label: "Plan oznaka", name: plan_oznaka, widget: string, required: false, hint: "HR: Izvedbeni plan nastave"}
+              - {label: "Plan naslov", name: plan_naslov, widget: text, required: false, hint: "HR: Popis predmeta."}
+              - {label: "Plan opis", name: plan_opis, widget: text, required: false, hint: "HR: Kliknite na predmet za kratak opis sadržaja. Nastava se izvodi kroz predavanja i samostalni rad, a ispit je usmeni ili pismeni."}
+              - {label: "Godina1", name: godina1, widget: string, required: false, hint: "HR: 1. godina"}
+              - {label: "Godina2", name: godina2, widget: string, required: false, hint: "HR: 2. godina"}
+              - {label: "Godina3", name: godina3, widget: string, required: false, hint: "HR: 3. godina"}
+              - {label: "Treca napomena", name: treca_napomena, widget: text, required: false, hint: "HR: U trećoj godini studija student odabire predmet po želji i uz mentorstvo profesora usavršava taj predmet i izrađuje diplomski rad."}
+              - {label: "Vodstvo oznaka", name: vodstvo_oznaka, widget: string, required: false, hint: "HR: Vodstvo Studija"}
+              - {label: "Vodstvo naslov", name: vodstvo_naslov, widget: text, required: false, hint: "HR: Tko vodi Studij."}
+              - {label: "Nastava oznaka", name: nastava_oznaka, widget: string, required: false, hint: "HR: Nastava"}
+              - {label: "Nastava naslov", name: nastava_naslov, widget: text, required: false, hint: "HR: Raspored i obavijesti."}
+              - {label: "Raspored naslov", name: raspored_naslov, widget: string, required: false, hint: "HR: Termini nastave"}
+              - {label: "Kal danas", name: kal_danas, widget: string, required: false, hint: "HR: Danas"}
+              - {label: "Kal sve", name: kal_sve, widget: string, required: false, hint: "HR: Preuzmi cijeli raspored (.ics)"}
+              - {label: "Kal napomena", name: kal_napomena, widget: text, required: false, hint: "HR: Raspored možete uvesti u Google, Apple ili Outlook kalendar."}
+              - {label: "Predavaci naslov", name: predavaci_naslov, widget: string, required: false, hint: "HR: Predavači"}
+              - {label: "Prijave oznaka", name: prijave_oznaka, widget: string, required: false, hint: "HR: Prijave · Tajništvo SIKD-a"}
+              - {label: "Prijave naslov", name: prijave_naslov, widget: text, required: false, hint: "HR: Zanima vas Studij?"}
+              - {label: "Prijave tekst", name: prijave_tekst, widget: text, required: false, hint: "HR: Prijave, predbilježbe i sve informacije o Studiju istočne kršćanske duhovnosti, upisima, rasporedu i nastavi primaju se preko Tajništva SIKD-a."}
+          - label: "4. Projects"
+            name: projekti
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: Projekti"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Ideje koje *ostavljaju trag.*"}
+              - {label: "Uvod", name: uvod, widget: text, required: false, hint: "HR: Razvijamo inicijative koje povezuju duhovnu izgradnju, mlade, očuvanje kršćanske baštine i suradnju preko granica."}
+              - {label: "Cta oznaka", name: cta_oznaka, widget: string, required: false, hint: "HR: Suradnja i potpora"}
+              - {label: "Cta naslov", name: cta_naslov, widget: text, required: false, hint: "HR: Želite se uključiti?"}
+              - {label: "Cta tekst", name: cta_tekst, widget: text, required: false, hint: "HR: Projekte ostvarujemo zahvaljujući suradnicima, partnerima i dobročiniteljima. Javite nam se ili podržite rad donacijom."}
+              - {label: "Cta gumb1", name: cta_gumb1, widget: string, required: false, hint: "HR: Podržite projekte ↗"}
+              - {label: "Cta gumb2", name: cta_gumb2, widget: string, required: false, hint: "HR: Kontakt za suradnju →"}
+          - label: "5. Stories Beneath Grič"
+            name: price
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: Tematske ekumenske večeri"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Priča *pored Griča.*"}
+              - {label: "Uvod", name: uvod, widget: text, required: false, hint: "HR: Tematske ekumenske večeri Studija istočne kršćanske duhovnosti u grkokatoličkoj župi sv. Ćirila i Metoda u Zagrebu, pored Griča: susreti, razgovori i svjedo"}
+              - {label: "O oznaka", name: o_oznaka, widget: string, required: false, hint: "HR: O večerima"}
+              - {label: "O naslov", name: o_naslov, widget: text, required: false, hint: "HR: Susret koji počinje pričom."}
+              - {label: "O tekst", name: o_tekst, widget: text, required: false, hint: "HR: Svaka večer posvećena je jednoj temi, a gosti iz različitih kršćanskih Crkava i zajednica, iz Hrvatske i inozemstva, dijele svoja iskustva i promišljanja. C"}
+              - {label: "Znacajka1", name: znacajka1, widget: string, required: false, hint: "HR: Tema večeri"}
+              - {label: "Znacajka1 tekst", name: znacajka1_tekst, widget: string, required: false, hint: "HR: Svaki susret ima jednu temu koju osvjetljavamo iz više tradicija."}
+              - {label: "Znacajka2", name: znacajka2, widget: string, required: false, hint: "HR: Gosti"}
+              - {label: "Znacajka2 tekst", name: znacajka2_tekst, widget: string, required: false, hint: "HR: Svjedočanstva i priče predstavnika različitih kršćanskih zajednica."}
+              - {label: "Znacajka3", name: znacajka3, widget: string, required: false, hint: "HR: Zajedništvo"}
+              - {label: "Znacajka3 tekst", name: znacajka3_tekst, widget: string, required: false, hint: "HR: Razgovor, molitva i druženje nakon programa."}
+              - {label: "Vecer oznaka", name: vecer_oznaka, widget: string, required: false, hint: "HR: Program"}
+              - {label: "Vecer naslov", name: vecer_naslov, widget: text, required: false, hint: "HR: Nadolazeće večeri."}
+              - {label: "Arhiva naslov", name: arhiva_naslov, widget: string, required: false, hint: "HR: Održane večeri"}
+          - label: "6. News and events"
+            name: novosti
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: Novosti i događanja"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Iz života *Instituta.*"}
+              - {label: "Uvod", name: uvod, widget: text, required: false, hint: "HR: Predavanja, konferencije, susreti i vijesti iz rada Instituta i Studija."}
+              - {label: "Dog oznaka", name: dog_oznaka, widget: string, required: false, hint: "HR: Kalendar"}
+              - {label: "Dog naslov", name: dog_naslov, widget: text, required: false, hint: "HR: Događanja."}
+              - {label: "Dog opis", name: dog_opis, widget: text, required: false, hint: "HR: Raspored predavanja, konferencija, susreta i večeri Priče pored Griča. Svako događanje možete dodati u svoj kalendar."}
+              - {label: "Prikaz kalendar", name: prikaz_kalendar, widget: string, required: false, hint: "HR: Kalendar"}
+              - {label: "Prikaz popis", name: prikaz_popis, widget: string, required: false, hint: "HR: Popis"}
+              - {label: "Kal danas", name: kal_danas, widget: string, required: false, hint: "HR: Danas"}
+              - {label: "Kal sve", name: kal_sve, widget: string, required: false, hint: "HR: Preuzmi sva nadolazeća događanja (.ics)"}
+              - {label: "Kal napomena", name: kal_napomena, widget: text, required: false, hint: "HR: Događanja možete uvesti u Google, Apple ili Outlook kalendar."}
+              - {label: "Tab nadolazeca", name: tab_nadolazeca, widget: string, required: false, hint: "HR: Nadolazeća"}
+              - {label: "Tab prosla", name: tab_prosla, widget: string, required: false, hint: "HR: Prošla"}
+              - {label: "Vij oznaka", name: vij_oznaka, widget: string, required: false, hint: "HR: Vijesti"}
+              - {label: "Vij naslov", name: vij_naslov, widget: text, required: false, hint: "HR: Novosti."}
+              - {label: "Vij opis", name: vij_opis, widget: text, required: false, hint: "HR: Odabrane vijesti i važne prekretnice u radu Instituta i Studija istočne kršćanske duhovnosti."}
+              - {label: "Vise", name: vise, widget: string, required: false, hint: "HR: Prikaži starije novosti"}
+              - {label: "Gal oznaka", name: gal_oznaka, widget: string, required: false, hint: "HR: Trenuci iz života Instituta"}
+              - {label: "Gal naslov", name: gal_naslov, widget: text, required: false, hint: "HR: Fotogalerija."}
+              - {label: "Gal opis", name: gal_opis, widget: text, required: false, hint: "HR: Predavanja, duhovni susreti, projekti i suradnje."}
+          - label: "7. Documents"
+            name: dokumenti
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: Dokumenti"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Javnost i *transparentnost.*"}
+              - {label: "Uvod", name: uvod, widget: text, required: false, hint: "HR: Statut, planovi rada, izvješća i financijski dokumenti Instituta."}
+              - {label: "Godina", name: godina, widget: string, required: false, hint: "HR: Godina"}
+          - label: "8. Donate"
+            name: donacije
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Sub oznaka", name: sub_oznaka, widget: string, required: false, hint: "HR: Donacije"}
+              - {label: "Sub naslov", name: sub_naslov, widget: text, required: false, hint: "HR: Podržite rad *Instituta.*"}
+              - {label: "Sub uvod", name: sub_uvod, widget: text, required: false, hint: "HR: Svaki dar pomaže Studiju, susretima i projektima poput Duhovnog centra u Sošicama."}
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: Podržite nas"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Vaš dar postaje prostor susreta."}
+              - {label: "Opis", name: opis, widget: text, required: false, hint: "HR: Institut djeluje zahvaljujući darovima prijatelja i dobročinitelja. Donacijom pomažete rad Studija istočne kršćanske duhovnosti, predavanja i susrete te pro"}
+              - {label: "Svrha1", name: svrha1, widget: string, required: false, hint: "HR: Duhovni centar"}
+              - {label: "Svrha1 tekst", name: svrha1_tekst, widget: string, required: false, hint: "HR: Prostor za susrete i radionice u Sošicama"}
+              - {label: "Svrha2", name: svrha2, widget: string, required: false, hint: "HR: Studij i predavanja"}
+              - {label: "Svrha2 tekst", name: svrha2_tekst, widget: string, required: false, hint: "HR: Obrazovni program i gosti predavači"}
+              - {label: "Svrha3", name: svrha3, widget: string, required: false, hint: "HR: Baština"}
+              - {label: "Svrha3 tekst", name: svrha3_tekst, widget: string, required: false, hint: "HR: Očuvanje sakralne i kulturne baštine"}
+              - {label: "Korak1", name: korak1, widget: string, required: false, hint: "HR: Odaberite ili upišite iznos i svrhu donacije."}
+              - {label: "Korak2", name: korak2, widget: text, required: false, hint: "HR: U aplikaciji mobilnog bankarstva odaberite **Skeniraj** ili **Plati barkodom** i usmjerite kameru na barkod."}
+              - {label: "Korak3", name: korak3, widget: string, required: false, hint: "HR: Provjerite podatke i potvrdite plaćanje."}
+              - {label: "Zahvala", name: zahvala, widget: text, required: false, hint: "HR: Hvala svakome tko nas podupire molitvom, radom i darom. Za potvrdu o primljenoj donaciji javite nam se e-poštom."}
+              - {label: "Kartica oznaka", name: kartica_oznaka, widget: string, required: false, hint: "HR: Donirajte"}
+              - {label: "Iznos", name: iznos, widget: string, required: false, hint: "HR: Iznos donacije"}
+              - {label: "Vlastiti", name: vlastiti, widget: string, required: false, hint: "HR: Ili upišite svoj iznos"}
+              - {label: "Svrha", name: svrha, widget: string, required: false, hint: "HR: Svrha donacije"}
+              - {label: "Primatelj", name: primatelj, widget: string, required: false, hint: "HR: Primatelj"}
+              - {label: "Model", name: model, widget: string, required: false, hint: "HR: Model i poziv na broj"}
+              - {label: "Model napomena", name: model_napomena, widget: string, required: false, hint: "HR: Poziv na broj ostavite prazan · OIB primatelja 41214716365"}
+          - label: "9. Contact"
+            name: kontakt
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Sub oznaka", name: sub_oznaka, widget: string, required: false, hint: "HR: Kontakt"}
+              - {label: "Sub naslov", name: sub_naslov, widget: text, required: false, hint: "HR: Otvoreni za susrete, *pitanja i suradnju.*"}
+              - {label: "Sub uvod", name: sub_uvod, widget: text, required: false, hint: "HR: Pišite nam putem obrasca ili e-pošte. Odgovaramo u najkraćem mogućem roku."}
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: Podaci"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Budimo u kontaktu."}
+              - {label: "Opis", name: opis, widget: text, required: false, hint: "HR: Zanimaju vas aktivnosti Instituta ili mogućnosti suradnje? Slobodno nam se obratite."}
+              - {label: "Napomena o Tajništvu SIKD-a", name: sikd_napomena, widget: text, required: false, hint: "HR: Za sve informacije o [Studiju istočne kršćanske duhovnosti](#studij-duhovnosti) obratite se **Tajništvu SIKD-a**"}
+              - {label: "Email oznaka", name: email_oznaka, widget: string, required: false, hint: "HR: E-pošta"}
+              - {label: "Adresa oznaka", name: adresa_oznaka, widget: string, required: false, hint: "HR: Registrirana adresa"}
+              - {label: "Drzava", name: drzava, widget: string, required: false, hint: "HR: Hrvatska"}
+              - {label: "Obrazac oznaka", name: obrazac_oznaka, widget: string, required: false, hint: "HR: Obrazac za upite"}
+              - {label: "Obrazac naslov", name: obrazac_naslov, widget: string, required: false, hint: "HR: Pošaljite nam poruku."}
+              - {label: "F ime", name: f_ime, widget: string, required: false, hint: "HR: Ime i prezime"}
+              - {label: "F email", name: f_email, widget: string, required: false, hint: "HR: E-pošta"}
+              - {label: "F tema", name: f_tema, widget: string, required: false, hint: "HR: Tema"}
+              - {label: "T1", name: t1, widget: string, required: false, hint: "HR: Opći upit"}
+              - {label: "T2", name: t2, widget: string, required: false, hint: "HR: Projekti i suradnja"}
+              - {label: "T3", name: t3, widget: string, required: false, hint: "HR: Priča pored Griča"}
+              - {label: "T4", name: t4, widget: string, required: false, hint: "HR: Donacije"}
+              - {label: "T5", name: t5, widget: string, required: false, hint: "HR: Mediji"}
+              - {label: "F studij", name: f_studij, widget: text, required: false, hint: "HR: Za upite o Studiju obratite se izravno Tajništvu SIKD-a."}
+              - {label: "F poruka", name: f_poruka, widget: string, required: false, hint: "HR: Poruka"}
+              - {label: "Tekst privole u obrascu", name: f_privola, widget: text, required: false, hint: "HR: Pristajem da Institut koristi moje podatke kako bi odgovorio na upit. Više u [obavijesti o privatnosti](#privatnost)."}
+              - {label: "F posalji", name: f_posalji, widget: string, required: false, hint: "HR: Pošalji upit"}
+              - {label: "Karta naslov", name: karta_naslov, widget: string, required: false, hint: "HR: Pronađite nas na karti."}
+              - {label: "Upute", name: upute, widget: string, required: false, hint: "HR: Upute za dolazak ↗"}
+              - {label: "Karta gumb", name: karta_gumb, widget: string, required: false, hint: "HR: Prikaži Google kartu ovdje"}
+              - {label: "Karta otvori", name: karta_otvori, widget: string, required: false, hint: "HR: Otvori u Google kartama ↗"}
+              - {label: "Karta privola", name: karta_privola, widget: text, required: false, hint: "HR: Karta se učitava s Googleovih poslužitelja, koji pritom mogu postaviti kolačiće, pa je prikazujemo tek kad to odobrite. Vaš odabir pamtimo za sljedeće posje"}
+          - label: "Privacy and cookies"
+            name: privatnost
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Oznaka", name: oznaka, widget: string, required: false, hint: "HR: Zaštita osobnih podataka"}
+              - {label: "Naslov", name: naslov, widget: text, required: false, hint: "HR: Privatnost i *kolačići.*"}
+              - {label: "Uvod", name: uvod, widget: text, required: false, hint: "HR: Kako postupamo s vašim podacima kad posjetite ovu stranicu ili nam se javite."}
+              - {label: "Cijeli tekst", name: tekst, widget: text, required: false, hint: "HR: Posljednja izmjena: 22. studenoga 2026.  ## 1. Voditelj obrade  Institut Sveti Ivan Zlatousti, Ulica sv. Ćirila i Metoda 1, 10000 Zagreb, OIB 41214716365. Z"}
+          - label: "Footer"
+            name: podnozje
+            widget: object
+            collapsed: true
+            fields:
+              - {label: "Opis", name: opis, widget: text, required: false, hint: "HR: Promicanje istočne kršćanske duhovnosti, znanja i bogatstva sakralne baštine."}
+              - {label: "Istrazite", name: istrazite, widget: string, required: false, hint: "HR: Istražite"}
+              - {label: "Lokacija", name: lokacija, widget: string, required: false, hint: "HR: Lokacija na karti"}
+              - {label: "Privatnost", name: privatnost, widget: string, required: false, hint: "HR: Privatnost i kolačići"}
+              - {label: "Prijava", name: prijava, widget: string, required: false, hint: "HR: Prijava za administratore"}
+              - {label: "Prava", name: prava, widget: string, required: false, hint: "HR: Sva prava pridržana."}
+              - {label: "Geslo", name: geslo, widget: string, required: false, hint: "HR: Vjera · Znanje · Tradicija"}
